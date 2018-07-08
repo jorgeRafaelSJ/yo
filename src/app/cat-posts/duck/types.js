@@ -1,9 +1,7 @@
 
 // types.js
-const INCREMENT_COUNT = 'INCREMENT_COUNT';
-const DECREMENT_COUNT = 'DECREMENT_COUNT';
+const LOAD_CAT_POSTS = 'LOAD_CAT_POSTS';
 
 export default {
-    INCREMENT_COUNT,
-    DECREMENT_COUNT,
+    LOAD_CAT_POSTS,
 }

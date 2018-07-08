@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import CatPosts from './cat-posts/index';
+import CatPosts from './cat-posts/container';
 import './app.css';
 
 class App extends Component {
