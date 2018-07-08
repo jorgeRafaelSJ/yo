@@ -1,0 +1,9 @@
+
+// types.js
+const INCREMENT_COUNT = 'INCREMENT_COUNT';
+const DECREMENT_COUNT = 'DECREMENT_COUNT';
+
+export default {
+    INCREMENT_COUNT,
+    DECREMENT_COUNT,
+}
