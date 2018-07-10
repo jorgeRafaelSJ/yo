@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { catPostsActions } from './duck';
+import { catPostActions } from './duck';
 import CatPost from './components/cat-post';
 
 class CatPosts extends Component {
 
     componentWillMount() {
         this.props.loadCatPosts()
-        console.log(this)
+    }
+
+    unpinPost(i) {
+        console.log('unpin', i)
+        this.props.unpinCatPost(i);
+    }
+
+    pinPost(i) {
+        console.log('pin', i)
+        this.props.pinCatPost(i);
     }
 
     render() {
-        const posts = this.props.cats.posts
-            // .sort((a, b) => {
-            //     console.log(a.data, b.data)
-            // })
-            .map((post, i) => {
-                return <CatPost key={ i } postData={ post.data } onPinClick={this.onPinClick}/>
-            })
+        const { pinnedPosts, unpinnedPosts } = this.props.cats;
+
+        const pinnedPostItems = pinnedPosts.map((post) => {
+            return <CatPost key={ post.id } postData={ post } pinned={true} unpinPost={ this.unpinPost.bind(this, post.id) }/>
+        });
+
+        const unpinnedPostItems = unpinnedPosts.map((post) => {
+            return <CatPost key={ post.id } postData={ post } pinPost={ this.pinPost.bind(this, post.id) } />
+        });
 
         return (
             <div>
-                { posts }
+                { pinnedPostItems }
+                { unpinnedPostItems }
             </div>
         )
     }
@@ -30,13 +42,9 @@ class CatPosts extends Component {
 
 CatPosts = connect(
     //mapStateToProps
-    (state) => ({
-        cats: state.catPosts
-    }), 
+    (state) => ({ cats: state.catPosts }), 
     //mapDispatchToProps
-    (dispatch) => bindActionCreators({
-        loadCatPosts: catPostsActions.loadCatPosts
-    }, dispatch)
+    (dispatch) => bindActionCreators({ ...catPostActions }, dispatch)
 )(CatPosts)
 
 export default CatPosts;

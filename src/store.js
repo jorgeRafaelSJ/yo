@@ -3,11 +3,12 @@ import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import createHistory from 'history/createBrowserHistory';
 import rootReducer from './app/root-reducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { loadState, saveState } from './local-storage';
+import { throttle } from 'lodash'; 
 
 export const history = createHistory();
 
-const initialState = {};
+const initialState = loadState();
 const enhancers = [];
 const middleware = [
   thunk,
@@ -32,5 +33,12 @@ const store = createStore(
   initialState,
   composedEnhancers
 );
+
+store.subscribe(throttle(() => {
+    console.log('saving', store.getState().catPosts)
+    saveState({
+        catPosts: store.getState().catPosts
+    })
+}, 1000));
 
 export default store;

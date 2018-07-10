@@ -1,4 +1,4 @@
-import catPostsReducer from './reducers';
-export { default as catPostsActions } from './actions';
-export { default as catPostsTypes } from './types';
-export default catPostsReducer;
+import catPostReducer from './reducers';
+export { default as catPostActions } from './actions';
+export { default as catPostTypes } from './types';
+export default catPostReducer;

@@ -3,15 +3,41 @@ import  { handleActions } from 'redux-actions';
 import types from './types';
 
 const initialState = {
-    posts: [],
+    unpinnedPosts: [],
+    pinnedPosts: [],
+    pinnedPostIds: {},
 }
-const catPostsReducer = handleActions(
+
+const catPostReducer = handleActions(
     {
       [types.LOAD_CAT_POSTS]: (state, action) => {
-        return { ...state, posts: action.payload }
-      }
+
+        return { ...state, unpinnedPosts: action.payload }
+      },
+      [types.PIN_CAT_POST]: (state, action) => {
+        let { id } = action.payload;
+        let unpinned = state.unpinnedPosts.filter(post => post.id !== id);
+        let postToPin = state.unpinnedPosts.filter(post => post.id === id)[0];
+        
+        return { ...state, 
+            unpinnedPosts: [...unpinned],
+            pinnedPosts: [ postToPin, ...state.pinnedPosts ],
+            pinnedPostIds: { ...state.pinnedPostIds, [id]: true },
+        }
+      }, 
+      [types.UNPIN_CAT_POST]: (state, action) => {
+        let { id } = action.payload;
+        let pinned = state.pinnedPosts.filter(post => post.id !== id);
+        let postToUnpin = state.pinnedPosts.filter(post => post.id === id)[0];
+        let { [id]: value, ...pinnedPostIdRemoved } = state.pinnedPostIds
+        return { ...state, 
+            pinnedPosts: [ ...pinned ],
+            unpinnedPosts: [ postToUnpin, ...state.unpinnedPosts],
+            pinnedPostIds: { ... pinnedPostIdRemoved },
+        }
+      },
     },
     initialState
   );
   
-  export default catPostsReducer;
+  export default catPostReducer;
