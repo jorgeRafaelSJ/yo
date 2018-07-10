@@ -3,6 +3,7 @@ import CatPost from './components/cat-post';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+/* STYLES */
 const StyledPostsWrapper = styled.div`
     padding: 50px 25px;
 
@@ -15,6 +16,7 @@ const PostSectionTitle = styled.h3`
     font-weight: 200;
 `;
 
+/* COMPONENT */
 export default class CatPosts extends Component {
 
     componentWillMount() {
