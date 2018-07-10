@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import CatPost from './components/cat-post';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledPostsWrapper = styled.div`
-    padding: 20px;
+    padding: 50px 25px;
+
+    @media(min-width: 768px) {
+        padding: 50px 100px;
+    }
 `;
 
 const PostSectionTitle = styled.h3`
@@ -41,4 +46,14 @@ export default class CatPosts extends Component {
             </StyledPostsWrapper>
         )
     }
+}
+
+CatPosts.propTypes = {
+    cats: PropTypes.shape({
+        pinnedPosts: PropTypes.array.isRequired,
+        unpinnedPosts: PropTypes.array.isRequired,
+    }),
+    pinCatPost: PropTypes.func.isRequired,
+    unpinCatPost: PropTypes.func.isRequired,
+    loadCatPosts: PropTypes.func.isRequired,
 }

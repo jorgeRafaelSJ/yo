@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapPin } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapPin } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledPostWrapper = styled.div`
@@ -15,6 +16,7 @@ const StyledPostIcon = styled.div`
     font-size: 20px;
     margin-right: 10px;
     cursor: pointer;
+    transition: color 0.4s ease;
     color: ${ props => props.pinned ? '#f00': '#33f'};
 
     &:hover {
@@ -24,8 +26,9 @@ const StyledPostIcon = styled.div`
 
 const StyledPostLink = styled.a`
     text-decoration: none;
-    color: #88f;
     font-weight: 300;
+    transition: color 0.4s ease;
+    color: #88f;
 
     &:focus, &:visited {
         color: #88f;
@@ -52,6 +55,13 @@ class CatPost extends Component {
         </StyledPostWrapper>
         )
     }
+}
+
+CatPost.propTypes = {
+    postData: PropTypes.object.isRequired,
+    onPinClick: PropTypes.func.isRequired,
+    pinned: PropTypes.bool,
+
 }
 
 export default CatPost;
