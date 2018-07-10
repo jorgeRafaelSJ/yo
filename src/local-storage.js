@@ -1,3 +1,4 @@
+/* Loads state from localStorage if it exists */
 export const loadState = () => {
     try {
         const serializedState = localStorage.getItem('state');
@@ -9,6 +10,7 @@ export const loadState = () => {
     }
 };
 
+/* Saves state to localStorage */
 export const saveState = (state) => {
     try {
         const serializedState = JSON.stringify(state);

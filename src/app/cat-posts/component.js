@@ -48,6 +48,7 @@ export default class CatPosts extends Component {
     }
 }
 
+/* PROP TYPES */
 CatPosts.propTypes = {
     cats: PropTypes.shape({
         pinnedPosts: PropTypes.array.isRequired,

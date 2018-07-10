@@ -4,6 +4,7 @@ import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+/* STYLES */
 const StyledPostWrapper = styled.div`
     margin-bottom: 5px;
     padding: 5px 10px;
@@ -37,9 +38,9 @@ const StyledPostLink = styled.a`
     &:hover {
         color: #33f;
     }
-
 `;
 
+/* COMPONENT */
 class CatPost extends Component {
 
     render() {
@@ -57,6 +58,7 @@ class CatPost extends Component {
     }
 }
 
+/* PROP TYPES */
 CatPost.propTypes = {
     postData: PropTypes.object.isRequired,
     onPinClick: PropTypes.func.isRequired,

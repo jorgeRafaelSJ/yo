@@ -34,6 +34,10 @@ const store = createStore(
   composedEnhancers
 );
 
+//saves state of catPosts reducer to localStorage when there is a change 
+//throttle does not allow the function to run more than once a second
+//sidenote: This will trigger event even if updates were happening in any part of the store, including routing.
+//There are some community solutions to only subscribe to parts of the store I believe. Need more research.
 store.subscribe(throttle(() => {
     saveState({
         catPosts: store.getState().catPosts
