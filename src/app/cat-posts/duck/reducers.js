@@ -11,8 +11,8 @@ const initialState = {
 const catPostReducer = handleActions(
     {
       [types.LOAD_CAT_POSTS]: (state, action) => {
-
-        return { ...state, unpinnedPosts: action.payload }
+        let withoutPreviouslyPinned = action.payload.filter(post => !state.pinnedPostIds[post.id]);
+        return { ...state, unpinnedPosts: withoutPreviouslyPinned }
       },
       [types.PIN_CAT_POST]: (state, action) => {
         let { id } = action.payload;
@@ -33,7 +33,7 @@ const catPostReducer = handleActions(
         return { ...state, 
             pinnedPosts: [ ...pinned ],
             unpinnedPosts: [ postToUnpin, ...state.unpinnedPosts],
-            pinnedPostIds: { ... pinnedPostIdRemoved },
+            pinnedPostIds: { ...pinnedPostIdRemoved },
         }
       },
     },
