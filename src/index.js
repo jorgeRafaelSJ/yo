@@ -7,7 +7,8 @@ import './index.css';
 import App from './app/index-app';
 import registerServiceWorker from './registerServiceWorker';
 
-const target = document.getElementById('root')
+const target = document.getElementById('root');
+document.title = 'Reddit Cat Posts';
 
 render(
     <Provider store={store}>

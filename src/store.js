@@ -2,9 +2,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import createHistory from 'history/createBrowserHistory';
-import rootReducer from './app/root-reducer';
-import { loadState, saveState } from './local-storage';
 import { throttle } from 'lodash'; 
+import { loadState, saveState } from './local-storage';
+import rootReducer from './app/root-reducer';
 
 export const history = createHistory();
 
@@ -35,7 +35,6 @@ const store = createStore(
 );
 
 store.subscribe(throttle(() => {
-    console.log('saving', store.getState().catPosts)
     saveState({
         catPosts: store.getState().catPosts
     })
